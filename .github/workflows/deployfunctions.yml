@@ -24,7 +24,7 @@ jobs:
             --runtime python310 \
             --trigger-http \
             --entry-point setup_gmail_watch \
-            --service-account YOUR_SERVICE_ACCOUNT_EMAIL \
+            --service-account emailtobq@emailtobq.iam.gserviceaccount.com \
             --source ./gmailwatchfunction/watch.py
             --set-env-vars REQUIREMENTS_FILE=./requirements.txt
 
@@ -34,6 +34,6 @@ jobs:
             --runtime python310 \
             --trigger-topic gmail-watch-topic \
             --entry-point process_email_event \
-            --service-account YOUR_SERVICE_ACCOUNT_EMAIL \
+            --service-account emailtobq@emailtobq.iam.gserviceaccount.com \
             --source ./emailprocessingfunction/emailprocessing.py
             --set-env-vars REQUIREMENTS_FILE=./requirements.txt
