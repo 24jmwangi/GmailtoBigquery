@@ -17,6 +17,7 @@ jobs:
         with:
           project_id: emailtobq
           service_account_key: ${{ secrets.GCP_SA_KEYS }}
+          export_default_credentials: true
 
       - name: Deploy Gmail Watch Function
         run: |
@@ -25,7 +26,7 @@ jobs:
             --trigger-http \
             --entry-point setup_gmail_watch \
             --service-account emailtobq@emailtobq.iam.gserviceaccount.com \
-            --source ./gmailwatchfunction/watch.py
+            --source ./gmailwatchfunction/watch.py \
             --set-env-vars REQUIREMENTS_FILE=./requirements.txt
 
       - name: Deploy Email Processing Function
@@ -35,5 +36,5 @@ jobs:
             --trigger-topic gmail-watch-topic \
             --entry-point process_email_event \
             --service-account emailtobq@emailtobq.iam.gserviceaccount.com \
-            --source ./emailprocessingfunction/emailprocessing.py
+            --source ./emailprocessingfunction/emailprocessing.py \
             --set-env-vars REQUIREMENTS_FILE=./requirements.txt
