@@ -12,7 +12,7 @@ def setup_gmail_watch(request):
     # Set up the watch
     watch_request = {
         'labelIds': ['INBOX'],
-        'topicName': 'projects/YOUR_PROJECT_ID/topics/gmail-watch-topic'
+        'topicName': 'projects/emailtobq/topics/newemail'
     }
     response = service.users().watch(userId='me', body=watch_request).execute()
     return f"Watch setup complete: {response}"
