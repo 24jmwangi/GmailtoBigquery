@@ -15,7 +15,7 @@ jobs:
       - name: Set up Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v0
         with:
-          project_id: YOUR_PROJECT_ID
+          project_id: emailtobq
           service_account_key: ${{ secrets.GCP_SA_KEY }}
 
       - name: Deploy Gmail Watch Function
