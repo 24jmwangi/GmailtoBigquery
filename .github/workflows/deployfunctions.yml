@@ -16,7 +16,7 @@ jobs:
         uses: google-github-actions/setup-gcloud@v0
         with:
           project_id: emailtobq
-          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          service_account_key: ${{ secrets.GCP_SA_KEYS }}
 
       - name: Deploy Gmail Watch Function
         run: |
