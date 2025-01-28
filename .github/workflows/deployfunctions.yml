@@ -1,0 +1,37 @@
+name: Deploy Cloud Functions
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0
+        with:
+          project_id: YOUR_PROJECT_ID
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Deploy Gmail Watch Function
+        run: |
+          gcloud functions deploy setup-gmail-watch \
+            --runtime python310 \
+            --trigger-http \
+            --entry-point setup_gmail_watch \
+            --service-account YOUR_SERVICE_ACCOUNT_EMAIL \
+            --source ./gmailwatchfunction/watch.py
+
+      - name: Deploy Email Processing Function
+        run: |
+          gcloud functions deploy process-email \
+            --runtime python310 \
+            --trigger-topic gmail-watch-topic \
+            --entry-point process_email_event \
+            --service-account YOUR_SERVICE_ACCOUNT_EMAIL \
+            --source ./emailprocessingfunction/emailprocessing.py
