@@ -26,6 +26,7 @@ jobs:
             --entry-point setup_gmail_watch \
             --service-account YOUR_SERVICE_ACCOUNT_EMAIL \
             --source ./gmailwatchfunction/watch.py
+            --set-env-vars REQUIREMENTS_FILE=./requirements.txt
 
       - name: Deploy Email Processing Function
         run: |
@@ -35,3 +36,4 @@ jobs:
             --entry-point process_email_event \
             --service-account YOUR_SERVICE_ACCOUNT_EMAIL \
             --source ./emailprocessingfunction/emailprocessing.py
+            --set-env-vars REQUIREMENTS_FILE=./requirements.txt
